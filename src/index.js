@@ -9,14 +9,18 @@ client.commands = new Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
-	// Set a new item in the Collection
-	// With the key as the command name and the value as the exported module
 	client.commands.set(command.data.name, command);
 }
 
 client.once('ready', () => {
 	console.log('Ready!');
+
+	// enviar mensagens: --> const channel = client.channels.cache.get('722517708742066218'); //TODO: change to devscansados channel id
+	// enviar mensagens: --> channel.send("Hey there, estamos online!")
+
 });
+
+
 
 client.on('interactionCreate', async interaction => {
 
@@ -32,7 +36,7 @@ client.on('interactionCreate', async interaction => {
 		console.error(error);
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
-	
+
 });
 
 client.login(bot_token);
