@@ -1,2 +1,2 @@
-config.json
-src/config.json
+# add config.json to ignore
+src/*.json
