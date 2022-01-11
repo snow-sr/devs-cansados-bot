@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0">
+    <link rel="stylesheet" href="/docs/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <title>Devs Cansados Bot</title>
+</head>
+<body class="bg-slate-800">
+
+  <main class="min-h-screen">
+
+  <div class="mt-50">
+    <div class="w-1/2 mx-auto">
+        <div class="w-full shadow-2xl subpixel-antialiased rounded h-64 bg-black border-black mx-auto">
+          <div class="flex items-center h-6 rounded-t bg-gray-100 border-b border-gray-500 text-center text-black" id="headerTerminal">
+            <div class="flex ml-2 items-center text-center border-red-900 bg-red-500 shadow-inner rounded-full w-3 h-3" id="closebtn">
+            </div>
+            <div class="ml-2 border-yellow-900 bg-yellow-500 shadow-inner rounded-full w-3 h-3" id="minbtn">
+            </div>
+            <div class="ml-2 border-green-900 bg-green-500 shadow-inner rounded-full w-3 h-3" id="maxbtn">
+            </div>
+            <div class="mx-auto pr-16" id="terminaltitle">
+              <p class="text-center text-sm">Terminal Cansado</p>
+            </div>
+      
+          </div>
+          <div class="pl-1 pt-1 h-auto font-mono text-s bg-black" id="console">
+            <p class="pb-1 text-blue-200" id="lastLogin">No javascript huh?</p>
+            <p class="pb-1 text-green-300 ">devs-cansados@bot: ~$ ./bot help</p>
+            <p class="pb-1 text-green-300">Run: used to run the bot</p>
+            <p class="pb-1 text-red-400">err: você não precisa saber nenhum outro comando;</p>
+            <p class="pb-1 text-red-400">exiting...</p>
+            <p class="pb-1 lastline text-green-300 ">devs-cansados@bot: ~$ ./bot run</p>
+            <div class="typing text-green-400">
+            <span>opening...</span>
+            <span class="cursor">Working now at <a class="text-indigo-300 underline" href="">devs cansados!</a></span>
+            </div>
+          </div>
+        </div> 
+      </div>
+  </div>
+
+  </main>
+
+      <script src="main.js"></script>
+</body>
+</html>
