@@ -1,0 +1,26 @@
+{
+  "name": "devs-cansados-bot",
+  "version": "1.0.0",
+  "description": "An discord bot for Devs Cansados",
+  "main": "index.js",
+  "scripts": {
+    "run": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/snow-sr/devs-cansados-bot.git"
+  },
+  "author": "Joao Felipi Cardoso, ",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/snow-sr/devs-cansados-bot/issues"
+  },
+  "homepage": "https://github.com/snow-sr/devs-cansados-bot#readme",
+  "dependencies": {
+    "@discordjs/rest": "^0.2.0-canary.0",
+    "discord-api-types": "^0.26.1",
+    "discord.js": "^13.5.1",
+    "fs": "^0.0.1-security",
+    "nodemon": "^2.0.15"
+  }
+}

@@ -1,0 +1,2 @@
+# add config.json to ignore
+src/*.json
