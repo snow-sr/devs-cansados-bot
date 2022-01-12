@@ -5,8 +5,9 @@
 </li>
 
 É recomendável olhar as abas "Creating your bot", e "Interactions" pra ter uma noção do que já está feito aqui e entender como mais ou menos tudo funciona.
+<hr>
 
-Para iniciar o projeto em sua máquina, faça a seguinte mandinga:
+## Para iniciar o projeto em sua máquina, faça a seguinte mandinga:
 <ul>
   <li>Arranje o arquivo que contém os tokens do bot (como fazer isso? olhe o discord)</li>
   <li>Baixe o repositório e utilize <code>npm i</code> para baixar as dependências necessárias</li>
