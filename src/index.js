@@ -2,7 +2,7 @@ const fs = require('fs')
 const { Client, Intents, Collection } = require('discord.js')
 const { botToken } = require('./config') // TODO: change the guildId to DevsCansados Id
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] })
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] })
 
 client.commands = new Collection()
 
@@ -14,9 +14,8 @@ for (const file of commandFiles) {
 
 client.once('ready', () => {
   console.log('Ready!')
-
-  // enviar mensagens: --> const channel = client.channels.cache.get('722517708742066218'); //TODO: change to devscansados channel id
-  // enviar mensagens: --> channel.send('Hey there, estamos online!')
+  //const channel = client.channels.cache.get('722517212702965762'); //TODO: change to devscansados channel id
+  //channel.send('Toca aquela braba do tim maia!')
 })
 
 client.on('interactionCreate', async interaction => {
@@ -35,3 +34,5 @@ client.on('interactionCreate', async interaction => {
 })
 
 client.login(botToken)
+
+module.exports = client
