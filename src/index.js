@@ -1,7 +1,7 @@
 const fs = require('fs')
 const client = require('./helpers/bot/client')
+const globalCollector = require('./helpers/bot/globalCollector')
 const { Collection } = require('discord.js')
-const { guildId } = require('./config')
 
 client.commands = new Collection()
 
@@ -11,19 +11,9 @@ for (const file of commandFiles) {
   client.commands.set(command.data.name, command)
 }
 
-client.once('ready', async () => {
+client.once('ready', () => {
   console.log('Ready!')
-  const filter = message => message.content.includes('discord') // TODO: create message filter
-  const guild = await client.guilds.fetch(guildId)
-  guild.channels.cache.each(channel => {
-    if (channel.type === 'GUILD_TEXT') {
-      const collector = channel.createMessageCollector({ filter })
-      collector.on('collect', message => {
-        message.channel.send('VOCÊ NÃO PODE MANDAR ISSO SEU COISA')
-        message.delete()
-      })
-    }
-  })
+  globalCollector()
 })
 
 client.on('interactionCreate', async interaction => {
