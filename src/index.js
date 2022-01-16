@@ -4,7 +4,7 @@ const { botToken, guildId } = require('./config') // TODO: change the guildId to
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] })
 client.usersMessagesBuffer = new Map()
-
+client.blockedSentences = []
 client.commands = new Collection()
 
 function setCommands(guild) {
@@ -26,7 +26,8 @@ function setCommands(guild) {
 
 function setSpamCollector(channel) {
   const { usersMessagesBuffer } = client
-  const spamCollector = channel.createMessageCollector({ filter: message => !message.author.bot })
+  // Verifica se a mensagem não foi enviada por um bot e se a mesma não está entre as sentenças blocqueadas
+  const spamCollector = channel.createMessageCollector({ filter: message => !message.author.bot && !client.blockedSentences.includes(message.content.toLowerCase()) })
   spamCollector.on('collect', message => {
     // Pega as ultimas mensagens enviadas do usuário que enviou a mensagem
     let messages = usersMessagesBuffer.get(message.author.id)
@@ -55,7 +56,7 @@ function setSpamCollector(channel) {
 }
 
 function setMessageFilter(channel) {
-  const filter = message => message.content.includes('discord') // TODO: create message filter
+  const filter = message => client.blockedSentences.includes(message.content.toLowerCase())
   const collector = channel.createMessageCollector({ filter })
   collector.on('collect', message => {
     message.channel.send('VOCÊ NÃO PODE MANDAR ISSO SEU COISA')
