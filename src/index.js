@@ -6,9 +6,9 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 const commandFiles = fs.readdirSync('./src/commands').filter(file => file.endsWith('.js'))
 const buffer = []
 
+client.commands = new Collection()
 
 const commandFiles = fs.readdirSync('./src/commands').filter(file => file.endsWith('.js'))
-client.commands = new Collection()
 
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`)
