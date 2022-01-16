@@ -3,10 +3,9 @@ const { Client, Intents, Collection } = require('discord.js')
 const { botToken, guildId } = require('./config') // TODO: change the guildId to DevsCansados Id
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] })
-const buffer = []
+client.usersMessagesBuffer = new Map()
 
 client.commands = new Collection()
-
 
 function setCommands(guild) {
   const commandFiles = fs.readdirSync('./src/commands').filter(file => file.endsWith('.js'))
@@ -26,16 +25,31 @@ function setCommands(guild) {
 }
 
 function setSpamCollector(channel) {
+  const { usersMessagesBuffer } = client
   const spamCollector = channel.createMessageCollector({ filter: message => !message.author.bot })
   spamCollector.on('collect', message => {
-    if (buffer.length >= 1000) {
-      buffer.pop()
-    }
-    if (buffer.includes(message.content)) {
-      message.channel.send('PARA DE SPAMMAR OW :face_with_symbols_over_mouth::face_with_symbols_over_mouth::face_with_symbols_over_mouth::face_with_symbols_over_mouth:')
-      message.delete()
+    // Pega as ultimas mensagens enviadas do usuário que enviou a mensagem
+    let messages = usersMessagesBuffer.get(message.author.id)
+    if (messages) {
+      // Guarda apenas as ultimas 5 mensagens do usuário apenas
+      if (messages.length >= 5) {
+        messages.pop()
+      }
+      // Caso a mensagem seja repetida ela é deletada e respondida pelo BOT
+      if (messages.includes(message.content.toLowerCase())) {
+        message.channel.send('PARA DE SPAMMAR OW :face_with_symbols_over_mouth::face_with_symbols_over_mouth::face_with_symbols_over_mouth::face_with_symbols_over_mouth:')
+        message.delete()
+      } else {
+        // Caso não seja uma mensagem repetida, o bot adiciona a mensagem em um Map, onde a key é o id do usuário e o value
+        // é uma array das ultimas 5 mensagens enviadas pelo usuário
+        messages.push(message.content.toLowerCase())
+        usersMessagesBuffer.set(message.author.id, messages)
+      }
     } else {
-      buffer.push(message.content)
+      // Caso a array de mensagens do usuário seja nula/indefinida, a mesma é inicializada e a primeira mensage é adicionada
+      messages = []
+      messages.push(message.content.toLowerCase())
+      usersMessagesBuffer.set(message.author.id, messages)
     }
   })
 }
