@@ -1,10 +1,12 @@
 const fs = require('fs')
+
 const { Client, Intents, Collection } = require('discord.js')
 const { botToken, guildId } = require('./config') // TODO: change the guildId to DevsCansados Id
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] })
 client.usersMessagesBuffer = new Map()
 client.blockedSentences = []
+
 client.commands = new Collection()
 
 function setCommands(guild) {
@@ -64,8 +66,9 @@ function setMessageFilter(channel) {
   })
 }
 
-client.once('ready', async () => {
+client.once('ready', () => {
   console.log('Ready!')
+
 
   const guild = await client.guilds.fetch(guildId)
 
@@ -94,7 +97,3 @@ client.on('interactionCreate', async interaction => {
     await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true })
   }
 })
-
-client.login(botToken)
-
-module.exports = client
